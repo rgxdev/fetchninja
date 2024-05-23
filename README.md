@@ -8,20 +8,20 @@ Fetchninja is a simple and easy to use library for fetching data from the intern
 You can install Fetchninja using `npm` or `yarn`. To install it using `npm`, run the following command in your terminal:
 
 ```bash
-npm install fetchninja
+npm install fetch-ninja
 ```
 
 To install it using `yarn`, run the following command:
 
 ```bash
-yarn add fetchninja
+yarn add fetch-ninja
 ```
 
 ## 🎯 Setup
 To use Fetchninja in your project, you need to import it into your code and set up the config. You can do this by adding the following line at the top of your file:
 
 ```javascript
-const { setConfig, apiCall } = require('fetchninja');
+const { setConfig, apiCall } = require('fetch-ninja');
 
 // Set configuration
 setConfig({
@@ -56,8 +56,4 @@ Fetchninja is released under the MIT License. You can find the full license text
 
 ## 🐞 Help and Bugs
 If you have any questions or need help with Fetchninja, you can reach out to us at our [discord](https://discord.gg/q93PD8pBgy) server.
-If you find any bugs or issues with Fetchninja, please report them and create an issue on our [GitHub](https://github.com/rgxdev/fetchnia) page.
-
-
-
-
+If you find any bugs or issues with Fetchninja, please report them and create an issue on our [GitHub](https://github.com/rgxdev/fetchninja) page.
