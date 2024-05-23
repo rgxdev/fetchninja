@@ -8,7 +8,7 @@ const supportedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 const sanitizeInput = (input, isEmail = false) => {
     if (typeof input === 'string') {
         if (isEmail) {
-            return input; // Do not sanitize email addresses
+            return input;
         }
         return input.replace(/[^a-zA-Z0-9 _-]/g, '');
     }
