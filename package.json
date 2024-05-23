@@ -1,0 +1,12 @@
+{
+  "name": "fetchninja",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rgxdev/fetchninja.git"
+  },
+  "private": false
+}
