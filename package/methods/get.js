@@ -12,6 +12,7 @@ const get = async (path, options = {}) => {
             url.searchParams.append(key, sanitizeInput(value, key));
         });
 
+
         const requestOptions = {
             method: 'GET',
             headers: { ...config.headers, ...options.headers },

@@ -13,7 +13,7 @@ const post = async (path, data = null, options = {}) => {
         });
 
         const sanitizedData = config.sanitize
-            ? Object.fromEntries(Object.entries(data || {}).map(([key, value]) => [key, sanitizeInput(value, key.includes('email'))]))
+            ? Object.fromEntries(Object.entries(data || {}).map(([key, value]) => [key, sanitizeInput(value, key)]))
             : data;
 
         const postData = JSON.stringify(sanitizedData);
