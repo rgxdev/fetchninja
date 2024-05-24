@@ -5,8 +5,8 @@ let config = {
     timeout: 5000,
     debug: false,
     sanitize: true,
-    error: true,
-    noSanitizeKeys: []
+    noSanitizeKeys: [],
+    error: true
 };
 
 const setConfig = (userConfig) => {
