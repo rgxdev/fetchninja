@@ -1,4 +1,4 @@
-// src/colors.js
+
 const colors = {
     bright: '\x1b[1m',
     dim: '\x1b[2m',

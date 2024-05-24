@@ -1,51 +1,19 @@
 const https = require('https');
-const { log, colors } = require('./logger');
-const { getConfig } = require('./config');
-const querystring = require('querystring');
+const { log, colors } = require('../logger');
+const { getConfig } = require('../config');
+const { sanitizeInput } = require('../sanitize');
 
-const supportedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
-
-const sanitizeInput = (input, isEmail = false) => {
-    if (typeof input === 'string') {
-        if (isEmail) {
-            return input;
-        }
-        return input.replace(/[^a-zA-Z0-9 _-]/g, '');
-    }
-    return input;
-};
-
-const apiCall = async (path, method, data = null, options = {}) => {
+const _delete = async (path, options = {}) => {
     const config = getConfig();
 
     try {
-        if (!supportedMethods.includes(method)) {
-            const errorMsg = `Unsupported method: ${method}`;
-            if (config.error) {
-                log(errorMsg, colors.red);
-            }
-            return { error: errorMsg };
-        }
-
         const url = new URL(path, config.baseUrl);
         Object.entries({ ...config.queryParams, ...options.queryParams }).forEach(([key, value]) => {
-            url.searchParams.append(key, sanitizeInput(value, key.includes('email')));
+            url.searchParams.append(key, sanitizeInput(value, key));
         });
 
-        let postData = '';
-        if (method === 'GET') {
-            Object.entries(data || {}).forEach(([key, value]) => {
-                url.searchParams.append(key, sanitizeInput(value, key.includes('email')));
-            });
-        } else {
-            const sanitizedData = config.sanitize
-                ? Object.fromEntries(Object.entries(data || {}).map(([key, value]) => [key, sanitizeInput(value, key.includes('email'))]))
-                : data;
-            postData = JSON.stringify(sanitizedData);
-        }
-
         const requestOptions = {
-            method,
+            method: 'DELETE',
             headers: { ...config.headers, ...options.headers },
             timeout: config.timeout
         };
@@ -81,10 +49,6 @@ const apiCall = async (path, method, data = null, options = {}) => {
                 resolve({ error: e.message });
             });
 
-            if (['POST', 'PUT', 'PATCH'].includes(method) && postData) {
-                req.write(postData);
-            }
-
             req.end();
         });
     } catch (error) {
@@ -95,8 +59,4 @@ const apiCall = async (path, method, data = null, options = {}) => {
     }
 };
 
-process.on('unhandledRejection', (reason, promise) => {
-    log(`Unhandled Rejection: ${reason.message || reason}`, colors.red);
-});
-
-module.exports = { apiCall };
+module.exports = _delete;

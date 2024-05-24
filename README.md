@@ -21,30 +21,42 @@ yarn add fetch-ninja
 To use Fetchninja in your project, you need to import it into your code and set up the config. You can do this by adding the following line at the top of your file:
 
 ```javascript
-const { setConfig, apiCall } = require('fetch-ninja');
+const { fetchninja } = require('fetch-ninja');
 
-// Set configuration
-setConfig({
-    debug: true,
-    baseUrl: 'YOUR API URL',
-    sanitize: true,
-    headers: { 'Content-Type': 'application/json' }
+// Set custom configuration
+fetchninja.setConfig({
+    debug: true, // Enable debug mode
+    baseUrl: 'https://api.schulsync.com', // Your api base url
+    sanitize: true, // Set to false to disable sanitization
+    noSanitizeKeys: ['password', 'email'] // Exclude these keys from sanitization
 });
 
 ```
 
 ## 🎮 Usage
-Using Fetchninja is very simple. You can make HTTP requests using the `apiCall` function. The function takes three arguments: the path, the method, and the data. Here is an example of how you can use the `apiCall` function to make a POST request:
+Using Fetchninja is very simple. You can make HTTP requests using the `fetchninja` function. The function takes three arguments: the path, the data, and optionally custom headers. Here is an example of how you can use the `apiCall` function to make a POST request:
 ```javascript
-const response = apiCall('/login', 'POST', { email: 'example@example.de', password: "the password" }, {
+// Make a POST request with data and then log it
+fetchninja.post('/login', {
+    email: 'email@mail.com',
+    password: "VERY_STRONG_PASSWORD"
+}).then(response => {
+    console.log('API Response:', response);
+}).catch(error => {
+    console.error('API Error:', error);
+});
+
+
+// Make a GET request with custom headers and then log it
+fetchninja.get('/@me', {
     headers: {
-        "Authorization": "Bearer token"
+        'Authorization': `Bearer ${someToken}`
     }
-}).then((response) => {
-    console.log(response);
-}).catch((error) => {
-    console.error(error);
-    });
+}).then(response => {
+    console.log('API Response:', response);
+}).catch(error => {
+    console.error('API Error:', error);
+});
 ```
 
 ## 💫 Conclusion
@@ -52,7 +64,7 @@ Fetchninja is a simple and easy to use library for making HTTP requests. It prov
 
 
 ## ✨ License
-Fetchninja is released under the MIT License. You can find the full license text [here]("").
+Fetchninja is released under the MIT License. You can find the full license text [here]("https://github.com/rgxdev/fetchninja/blob/main/LICENSE").
 
 ## 🐞 Help and Bugs
 If you have any questions or need help with Fetchninja, you can reach out to us at our [discord](https://discord.gg/q93PD8pBgy) server.

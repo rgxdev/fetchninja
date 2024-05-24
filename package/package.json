@@ -1,7 +1,7 @@
 {
   "name": "fetch-ninja",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "A libary to make fetch requests easier",
   "main": "index.js",
   "license": "MIT",
   "repository": {

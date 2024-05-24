@@ -1,11 +1,12 @@
 let config = {
-    debug: false,
-    error: true,
     baseUrl: '',
     headers: {},
-    timeout: 5000,
     queryParams: {},
-    sanitize: true
+    timeout: 5000,
+    debug: false,
+    sanitize: true,
+    error: true,
+    noSanitizeKeys: []
 };
 
 const setConfig = (userConfig) => {
